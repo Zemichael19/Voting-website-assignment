@@ -1,47 +1,126 @@
-<!-- Example with a loop over a JQuery object. -->
+<!-- Overall structure for any web page -->
 <!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Poll</title>
+    <title>TITLE</title>
+    <style>
+
+    .choice {
+height: 400px;
+display: inline-block;
+width: 100px;
+}
+
+.result {
+height: 330px;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+}
+
+.bar {
+height: 0%;
+width: 70%;
+margin: 0 auto;
+}
+
+.bar[data-choice="1"] {
+background-color: red;
+}
+
+.bar[data-choice="2"] {
+background-color: green;
+}
+
+.bar[data-choice="3"] {
+background-color: blue;
+}
+
+.label {
+height: 70px;
+text-align: center;
+}
+
+    </style>
   </head>
   <body>
-    <form>
-      <input type="text" name="left">
-      <input type="text" name="right">
-      <button type="submit">Create</button>
-    </form>
-    <div id="todo"></div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script>
+    <div id="choices">
+  <div class="choice">
+    <div class="result">
+      <div class="bar" data-choice="1"></div>
+    </div>
+    <div class="label">
+      <p>Choice 1</p>
+      <button data-choice="1">Vote</button>
+    </div>
+  </div>
+  <div class="choice">
+    <div class="result">
+      <div class="bar" data-choice="2"></div>
+    </div>
+    <div class="label">
+      <p>Choice 2</p>
+      <button data-choice="2">Vote</button>
+    </div>
+  </div>
+  <div class="choice">
+    <div class="result">
+      <div class="bar" data-choice="3"></div>
+    </div>
+    <div class="label">
+      <p>Choice 3</p>
+      <button data-choice="3">Vote</button>
+    </div>
+  </div>
+</div>
 
-      // Number of times the form has been submitted
-      let counter = 0;
+<script >
+var buttons = document.querySelectorAll(".choice button"),
+tally = {
+  1: 0,
+  2: 0,
+  3: 0,
+  total: 0
+};
 
-      // Respond to submit events
-      $('form').on('submit', function(event) {
-        const form = $(this); // JQuery object representing the form
-        event.preventDefault(); // Don't really submit the form
+function vote(choice) {
+tally[choice]++;
+tally["total"]++;
+console.log(tally);
+}
 
-        // Create a new list
-        const list = $('<ul></ul>');
+function barPercentage(node, tally) {
+var choice = node.dataset.choice;
 
-        // Translate each input value into a list item
-        const inputs = form.find('input'); // JQuery object represent all inputs
-        for (let input of inputs) {
-          input = $(input); // Turn into a JQuery object
-          const li = $(`<li>${input.val()}</li>`); // New list item
-          list.append(li);
-          input.val(''); // Empty out the box
-        }
+if (tally[choice])
+  return tally[choice]/tally["total"] * 100;
+return 0;
+}
 
-        counter++;
-        const p = $(`<p>Addition #${counter}</p>`);
+function renderBars() {
+var bars = document.getElementsByClassName("bar");
 
-        // Add to the page
-        $('#todo').append(p);
-        $('#todo').append(list);
-      });
+for (var i = 0; i < bars.length; i++) {
+  var percentage = barPercentage(bars[i], tally);
+  console.log(percentage)
+  bars[i].style.height = percentage.toString() + "%";
+}
+}
 
-    </script>
+function setup() {
+// Set up event listeners
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", function(e) {
+    vote(e.target.dataset["choice"]);
+    renderBars();
+  });
+}
+
+renderBars();
+}
+
+setup();
+</script>
   </body>
 </html>
