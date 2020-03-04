@@ -38,6 +38,8 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
+
+      let counter = 1
       $('form').on('submit', function(event) {
         event.preventDefault();
 
@@ -45,8 +47,9 @@
 
       $('.form1').on('click', 'button', function(event) {
         const id = $(this).attr('id');
-        const li = $(`<li>Clicked button ${id}</li>`);
+        const li = $(`<ul> ${counter}. Clicked button </ul>`);
         $('#clicks').append(li);
+        counter++;
       });
     </script>
   </body>
