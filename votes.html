@@ -6,58 +6,38 @@
     <title>My Poll</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
+  <h1 class="p-3 m-3">My Poll</h1>
   <body>
-    <main>
-      <form class="p-3 m-3 border border-secondary">
+      <div class="p-3 m-3 border border-secondary">
         <div class="pp-3 mb-2 bg-light text-dark">
-          <div class="form-group">
+          <form class="form">
             <label for="text">Ask your question</label>
               <input type="text" id="text" name="text">
-              <button type="submit">Submit</button>
-              </div>
-
-              <div class="form">
-                <label for="text">Options</label>
-                  <input type="text">
-                  <button type="submit">Add</button>
-                  <ul id="clicks"></ul>
-
-              </div>
-
-
-
-          <div class="p-0 col">
-            <table border = 1>
-              <tr>
-                <td>Option</td>
-                <td>Votes</td>
-              </tr>
-            </table>
-          </div>
+              <button class="btn btn-secondary" type="submit">Submit</button>
+              <button id = "remove" class="btn btn-secondary" type="submit">Edit Question</button>
+              <ul id="clicks"></ul>
+            </form>
         </div>
-      </form>
-    </main>
+      </div>
+    </body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
 
-      let counter = 1
-
       $('.form').on('click', 'button', function(event) {
+        let counter = 1
         event.preventDefault();
         const input = $('input');
-        const item = input.val('');
-        const li = $(`<ul> Option ${counter} <button type="submit">Delete</button> </ul>`);
-        counter++;
+        const item = input.val();
+        input.val('');
+        const li = $(`<ul><h1>${item}</h1></ul>`);
+
         $('#clicks').append(li);
-        
-        if (counter < 1) {
-          counter = 1;
-        }
+
+        $('#remove').click(function(){
+          event.preventDefault();
+          $(li).remove();
+        });
       });
-
-
-
-
 
     </script>
   </body>
