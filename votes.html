@@ -16,11 +16,12 @@
               <button type="submit">Submit</button>
               </div>
 
-              <div class="form1">
+              <div class="form">
                 <label for="text">Options</label>
-                  <input type="text" id="text" name="text">
+                  <input type="text">
                   <button type="submit">Add</button>
                   <ul id="clicks"></ul>
+
               </div>
 
 
@@ -40,17 +41,24 @@
     <script>
 
       let counter = 1
-      $('form').on('submit', function(event) {
+
+      $('.form').on('click', 'button', function(event) {
         event.preventDefault();
-
-      });
-
-      $('.form1').on('click', 'button', function(event) {
-        const id = $(this).attr('id');
-        const li = $(`<ul> ${counter}. Clicked button </ul>`);
-        $('#clicks').append(li);
+        const input = $('input');
+        const item = input.val('');
+        const li = $(`<ul> Option ${counter} <button type="submit">Delete</button> </ul>`);
         counter++;
+        $('#clicks').append(li);
+        
+        if (counter < 1) {
+          counter = 1;
+        }
       });
+
+
+
+
+
     </script>
   </body>
 </html>
