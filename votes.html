@@ -27,7 +27,7 @@
       </div>
     </body>
     <ul id="answers">
-      <li id="placeholder">Create a Poll</li>
+      <span id="placeholder"></span>
     </ul>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
@@ -76,7 +76,7 @@
     // Put back the placeholder if it's empty
     const items = $('li');
     if (items.length == 0) {
-      $('#answers').append($('<li id="placeholder">Create a Poll</li>'));
+      $('#answers').append($('<span id="placeholder"></span>'));
       }
     });
     </script>
