@@ -93,7 +93,7 @@
      $('#answers').on('click', 'button', function(event) {
        $(this).closest('ul').remove();
      });
-     let q = [];
+     let length1 = [];
     $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
 
@@ -106,7 +106,7 @@
       for (let option of options) {
         console.log(option);
         option = $(option);
-        q.push(0);
+        length1.push(0);
         array1.push(option.text());
 
 
@@ -131,8 +131,9 @@
         event.preventDefault();
         for (let s of save) {
           document.getElementById(s).addEventListener("click", function() {
-            $('#dumb').append("hi");
             
+            length1[save.indexOf(s)]+=1;
+            console.log(length1);
         });
       }
     });
