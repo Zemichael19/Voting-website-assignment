@@ -8,38 +8,59 @@
   </head>
   <h1 class="p-3 m-3">My Poll</h1>
   <body>
-      <div class="p-3 m-3 border border-secondary">
+      <div id = "voting2" class="p-3 m-3 border border-secondary">
         <div class="pp-3 mb-2 bg-light text-dark">
-
           <form class="form">
             <label for="text">Ask your question</label>
-              <input type="text" id="text" name="text">
+              <input type="text" id="question" name="text">
               <button class="btn btn-secondary" type="submit">Submit</button>
               <button id = "remove" class="btn btn-secondary" type="submit">Edit Question</button>
               <ul id="clicks"></ul>
             </form>
 
             <form class="two">
+              <label for="text">Add options</label>
               <input type="text" id="choice">
               <button class="btn btn-secondary" type="submit">Add Option</button>
             </form>
+            <ul id = "answers">
+            </ul>
         </div>
       </div>
+    <h3></h3>
+    <div class="p-3 m-3 border border-secondary">
+      <div class="pp-3 mb-2 bg-light text-dark">
+        <form class="finish">
+          <button id = "done" class="btn btn-secondary" type="submit">Submit</button>
+          <ul id="final"></ul>
+        </form>
+      </div>
+    </div>
     </body>
-    <ul id="answers">
-      <span id="placeholder"></span>
-    </ul>
+    <form id="hello">
+
+    </form>
+    <div id = "voting2" class="p-3 m-3 border border-secondary">
+      <div class="pp-3 mb-2 bg-light text-dark">
+        <button type="submit" id="vote"></button>
+      </div>
+    </div>
+    <form id="dumb">
+
+    </form>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
-
+      let y = '';
+      let save =[];
       $('.form').on('click', 'button', function(event) {
-        let counter = 1
+
         event.preventDefault();
         const input = $('input');
         const item = input.val();
+        y = input.val();
         input.val('');
         const li = $(`<ul><h1>${item}</h1></ul>`);
-
+        ;
         $('#clicks').append(li);
 
         $('#remove').click(function(){
@@ -48,38 +69,75 @@
         });
       });
 
-      // Add to the choice list
+
+      //Add to the choice list
       $('.two').on('submit', function(event) {
+
+        event.preventDefault();
+        // Grab the text and empty the box
+
+        const option = $('#choice');
+        const op = option.val();
+        option.val('');
+        // Add a non-empty item to the list
+        if (op) {
+        $('#answers').append($(`
+          <ul>
+            <span><h2>${op}</h2></span>
+            <button class="btn btn-secondary">Delete</button>
+          </ul>
+        `));
+        }
+    });
+      // Delete from the choice list
+     $('#answers').on('click', 'button', function(event) {
+       $(this).closest('ul').remove();
+     });
+     let q = [];
+    $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
 
-      // Grab the text and empty the box
-      const option = $('#choice');
-      const op = option.val();
-      option.val('');
+      const list = $(`<ul><h1>${y}</h1></ul>`);
+      const options = $('span');
+      let array1 = [];
 
-      // Add a non-empty item to the list
-      if (op) {
-      $('#placeholder').remove();
-      $('#answers').append($(`
-        <li>
-          <span>${op}</span>
-          <button>Delete</button>
-          <button>Submit</button>
-        </li>
-      `));
+
+      $('#final').append(list);
+      for (let option of options) {
+        console.log(option);
+        option = $(option);
+        q.push(0);
+        array1.push(option.text());
+
+
+      };
+      let counter = 0;
+      save = array1;
+      for (let choice of array1) {
+        const choices = $(`<ul>${choice} <button id = "${choice}" class="btn btn-secondary">Vote</button><ul>`);
+        counter++;
+        $('#hello').append(choices);
+
+      };
+        console.log(array1);
+        $('#answers').remove();
+        $('#voting').remove();
+        $('#voting2').remove();
+        $('#done').remove();
+
+    });
+
+    $('#hello').on('click', 'button', function(event) {
+        event.preventDefault();
+        for (let s of save) {
+          document.getElementById(s).addEventListener("click", function() {
+            $('#dumb').append("hi");
+            
+        });
       }
     });
 
-    // Delete from the choice list
-    $('#answers').on('click', 'button', function(event) {
-    $(this).closest('li').remove();
 
-    // Put back the placeholder if it's empty
-    const items = $('li');
-    if (items.length == 0) {
-      $('#answers').append($('<span id="placeholder"></span>'));
-      }
-    });
     </script>
   </body>
 </html>
