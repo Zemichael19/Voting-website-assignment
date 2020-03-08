@@ -17,14 +17,12 @@
               <button id = "remove" class="btn btn-secondary" type="submit">Edit Question</button>
               <ul id="clicks"></ul>
             </form>
-
             <form class="two">
               <label for="text">Add options</label>
               <input type="text" id="choice">
               <button class="btn btn-secondary" type="submit">Add Option</button>
             </form>
-            <ul id = "answers">
-            </ul>
+            <ul id = "answers"></ul>
         </div>
       </div>
     <h3></h3>
@@ -37,17 +35,8 @@
       </div>
     </div>
     </body>
-    <form id="hello">
-
-    </form>
-    <div id = "voting2" class="p-3 m-3 border border-secondary">
-      <div class="pp-3 mb-2 bg-light text-dark">
-        <button type="submit" id="vote"></button>
-      </div>
-    </div>
-    <form id="dumb">
-
-    </form>
+    <form id="hello"></form>
+    <form id="dumb"></form>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
       let y = '';
@@ -70,6 +59,7 @@
       });
 
 
+
       //Add to the choice list
       $('.two').on('submit', function(event) {
 
@@ -89,11 +79,14 @@
         `));
         }
     });
+
+
+
       // Delete from the choice list
      $('#answers').on('click', 'button', function(event) {
        $(this).closest('ul').remove();
      });
-     let length1 = [];
+
     $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
 
@@ -101,6 +94,12 @@
       const options = $('span');
       let array1 = [];
 
+      $('#dumb').append($(`<div id = "voting2" class="p-3 m-3 border border-secondary">
+        <div class="pp-3 mb-2 bg-light text-dark">
+          <button class="btn btn-secondary" id="submit2">Create Another Poll</button>
+          <button class="btn btn-secondary" id="submit3">View Results</button>
+        </div>
+      </div>`));
 
       $('#final').append(list);
       for (let option of options) {
@@ -109,13 +108,11 @@
         length1.push(0);
         array1.push(option.text());
 
-
       };
-      let counter = 0;
+
       save = array1;
       for (let choice of array1) {
         const choices = $(`<ul>${choice} <button id = "${choice}" class="btn btn-secondary">Vote</button><ul>`);
-        counter++;
         $('#hello').append(choices);
 
       };
@@ -127,18 +124,36 @@
 
     });
 
+
+    let length1 = [];
     $('#hello').on('click', 'button', function(event) {
         event.preventDefault();
         for (let s of save) {
-          document.getElementById(s).addEventListener("click", function() {
-            
-            length1[save.indexOf(s)]+=1;
+          const count = document.getElementById(s)
+          count.onclick = function() {
+            length1[save.indexOf(s)]++;
             console.log(length1);
-        });
-      }
+        };
+      };
     });
 
+    $('#hello').on('click', 'button', function(event) {
+        event.preventDefault(); // Don't really submit the form
 
+        // Create a new list
+        const list2 = $('<ul></ul>');
+
+        // Translate each input value into a list item
+        const votes = lenght1; // JQuery object represent all inputs
+        for (let v of votes) {
+          votes = $(v); // Turn into a JQuery object
+          const l = $(`<li>${votes.val()}</li>`); // New list item
+          list2.append(l);
+          votes.val(''); // Empty out the box
+        }
+
+        $('#dumb').append(list2);
+      });
     </script>
   </body>
 </html>
