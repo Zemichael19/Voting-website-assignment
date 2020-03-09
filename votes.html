@@ -17,12 +17,14 @@
               <button id = "remove" class="btn btn-secondary" type="submit">Edit Question</button>
               <ul id="clicks"></ul>
             </form>
+
             <form class="two">
               <label for="text">Add options</label>
               <input type="text" id="choice">
               <button class="btn btn-secondary" type="submit">Add Option</button>
             </form>
-            <ul id = "answers"></ul>
+            <ul id = "answers">
+            </ul>
         </div>
       </div>
     <h3></h3>
@@ -35,37 +37,38 @@
       </div>
     </div>
     </body>
-    <form id="hello"></form>
-    <form id="dumb"></form>
+    <div class="p-3 m-3">
+      <div class="pp-3 mb-2 bg-light text-dark">
+        <form id="hello">
+
+        </form>
+
+    </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
     <script>
       let y = '';
       let save =[];
       $('.form').on('click', 'button', function(event) {
-
         event.preventDefault();
         const input = $('input');
         const item = input.val();
         y = input.val();
         input.val('');
         const li = $(`<ul><h1>${item}</h1></ul>`);
-        ;
         $('#clicks').append(li);
 
         $('#remove').click(function(){
           event.preventDefault();
           $(li).remove();
         });
+
+
       });
-
-
-
       //Add to the choice list
       $('.two').on('submit', function(event) {
-
         event.preventDefault();
         // Grab the text and empty the box
-
         const option = $('#choice');
         const op = option.val();
         option.val('');
@@ -78,82 +81,62 @@
           </ul>
         `));
         }
+
     });
-
-
-
       // Delete from the choice list
      $('#answers').on('click', 'button', function(event) {
        $(this).closest('ul').remove();
      });
-
+     let length1 = [];
     $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
-
       const list = $(`<ul><h1>${y}</h1></ul>`);
       const options = $('span');
       let array1 = [];
-
-      $('#dumb').append($(`<div id = "voting2" class="p-3 m-3 border border-secondary">
-        <div class="pp-3 mb-2 bg-light text-dark">
-          <button class="btn btn-secondary" id="submit2">Create Another Poll</button>
-          <button class="btn btn-secondary" id="submit3">View Results</button>
-        </div>
-      </div>`));
-
       $('#final').append(list);
       for (let option of options) {
         console.log(option);
         option = $(option);
         length1.push(0);
         array1.push(option.text());
-
       };
-
       save = array1;
+      let result_a = 0
       for (let choice of array1) {
         const choices = $(`<ul>${choice} <button id = "${choice}" class="btn btn-secondary">Vote</button><ul>`);
+        const res = $(`<h5 id = "${length1[result_a]}">${length1[result_a]}</h5>`);
         $('#hello').append(choices);
-
+        $('#hello').append(res);
+        result_a ++;
       };
+
         console.log(array1);
         $('#answers').remove();
         $('#voting').remove();
         $('#voting2').remove();
         $('#done').remove();
 
+        for (let i = 0; i < save.length; i++) {
+          const count = document.getElementById(save[i]);
+          count.onclick = function() {
+            length1[i]+=1;
+            $('h5').text(length[i]);
+
+            console.log(length1);
+          }
+      }
+
     });
-
-
-    let length1 = [];
     $('#hello').on('click', 'button', function(event) {
         event.preventDefault();
-        for (let s of save) {
-          const count = document.getElementById(s)
-          count.onclick = function() {
-            length1[save.indexOf(s)]++;
-            console.log(length1);
-        };
-      };
+
+
+
+
     });
 
-    $('#hello').on('click', 'button', function(event) {
-        event.preventDefault(); // Don't really submit the form
 
-        // Create a new list
-        const list2 = $('<ul></ul>');
 
-        // Translate each input value into a list item
-        const votes = lenght1; // JQuery object represent all inputs
-        for (let v of votes) {
-          votes = $(v); // Turn into a JQuery object
-          const l = $(`<li>${votes.val()}</li>`); // New list item
-          list2.append(l);
-          votes.val(''); // Empty out the box
-        }
-
-        $('#dumb').append(list2);
-      });
     </script>
   </body>
 </html>
