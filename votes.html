@@ -6,7 +6,7 @@
     <title>My Poll</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
-  <h1 class="p-3 m-3">My Poll</h1>
+  <a href="file:///Users/rcott/github/a3-a3-mike-riley/votes.html?text=" class="nav-link text-light bg-dark"><h1 class="p-3 m-3">My Poll</h1></a>
   <body>
       <div id = "voting2" class="p-3 m-3 border border-secondary">
         <div class="pp-3 mb-2 bg-light text-dark">
@@ -60,7 +60,7 @@
         const item = input.val();
         y = input.val();
         input.val('');
-        const li = $(`<ul><h1>${item}</h1></ul>`);
+        const li = $(`<ul class="text-capitalize"><h1>${item}</h1></ul>`);
         $('#clicks').append(li);
 
         $('#remove').click(function(event){
@@ -96,7 +96,7 @@
      let length1 = [];
     $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
-      const list = $(`<ul><h1>${y}</h1></ul>`);
+      const list = $(`<ul class="text-capitalize"><h1>${y}?</h1></ul>`);
       const options = $('span');
       let array1 = [];
       $('#final').append(list);
@@ -114,7 +114,7 @@
         $('#hello').append(choices);
         result_a ++;
       };
-        const FinalSubmit = $('<button id="but"class="btn btn-secondary" type="submit">Submit</button>')
+        const FinalSubmit = $('<button id="but" class="btn btn-secondary" type="submit">Submit</button>')
         $('#FinalSub').append(FinalSubmit);
         console.log(array1);
         $('#answers').remove();
@@ -140,7 +140,7 @@
         $('#hello').remove();
         let c = 0;
         for (let ans of save) {
-          const tally = $(`<ul>${ans} <button id = "${ans}" class="btn btn-secondary">${length1[c]}</button><ul>`);
+          const tally = $(`<ul>${ans} <span id = "${ans}" class="btn btn-secondary">Had ${length1[c]} votes! </span></ul>`);
           $('#FinalSub').append(tally);
           console.log(ans);
           c++;
