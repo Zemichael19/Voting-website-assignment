@@ -49,8 +49,9 @@
 
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>
+
       let y = '';
       let save =[];
       $('.form').on('click', 'button', function(event) {
@@ -62,13 +63,12 @@
         const li = $(`<ul><h1>${item}</h1></ul>`);
         $('#clicks').append(li);
 
-        $('#remove').click(function(){
+        $('#remove').click(function(event){
           event.preventDefault();
           $(li).remove();
         });
-
-
       });
+
       //Add to the choice list
       $('.two').on('submit', function(event) {
         event.preventDefault();
@@ -87,10 +87,12 @@
         }
 
     });
+
       // Delete from the choice list
      $('#answers').on('click', 'button', function(event) {
        $(this).closest('ul').remove();
      });
+
      let length1 = [];
     $('.finish').on('click', 'button', function(event) {
       event.preventDefault();
@@ -104,6 +106,7 @@
         length1.push(0);
         array1.push(option.text());
       };
+
       save = array1;
       let result_a = 0
       for (let choice of array1) {
@@ -123,15 +126,15 @@
           const count = document.getElementById(save[i]);
           count.onclick = function() {
             length1[i]+=1;
-
             console.log(length1);
           }
       }
-
     });
+
     $('#hello').on('click', 'button', function(event) {
         event.preventDefault();
     });
+
     $('#FinalSub').on('click', 'button', function(event) {
         event.preventDefault();
         $('#hello').remove();
@@ -143,10 +146,7 @@
           c++;
         }
         $('#but').remove();
-
     });
-
-
 
     </script>
   </body>
