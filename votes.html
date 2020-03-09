@@ -134,10 +134,13 @@
     });
     $('#FinalSub').on('click', 'button', function(event) {
         event.preventDefault();
-        for (let ans of length1) {
-          const FinalSubmit = $(`<h4>${ans}</h4>`)
-          $('#FinalSub').append(FinalSubmit);
+        $('#hello').remove();
+        let c = 0;
+        for (let ans of save) {
+          const tally = $(`<ul>${ans} <button id = "${ans}" class="btn btn-secondary">${length1[c]}</button><ul>`);
+          $('#FinalSub').append(tally);
           console.log(ans);
+          c++;
         }
         $('#but').remove();
 
